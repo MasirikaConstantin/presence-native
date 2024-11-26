@@ -1,13 +1,13 @@
 <?php
-// creer_utilisateur.php
 
+// creer_utilisateur.php
+require_once 'config.php';
+require_once 'db.php';
 session_start();
 if (!isset($_SESSION['admin_id'])) {
     header('Location: login.php');
     exit;
 }
-require_once 'config.php';
-require_once 'db.php';
 
 $pdo = getDbConnection();
 
@@ -21,17 +21,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = $_POST['nom'] ?? '';
     $adresse = $_POST['adresse'] ?? '';
     $lieu_id = $_POST['lieu_id'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-    if (empty($nom) || empty($adresse) || empty($lieu_id)) {
+    if (empty($nom) || empty($adresse) || empty($lieu_id) || empty($password)) {
         $message = 'Veuillez remplir tous les champs.';
     } else {
         try {
+            // Hash du mot de passe
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
             // Insérer le nouvel utilisateur
-            $stmt = $pdo->prepare("INSERT INTO utilisateur (nom, adresse, lieu_id) VALUES (:nom, :adresse, :lieu_id)");
+            $stmt = $pdo->prepare(
+                "INSERT INTO utilisateur (nom, adresse, lieu_id, password) 
+                 VALUES (:nom, :adresse, :lieu_id, :password)"
+            );
             $stmt->execute([
                 'nom' => $nom,
                 'adresse' => $adresse,
-                'lieu_id' => $lieu_id
+                'lieu_id' => $lieu_id,
+                'password' => $hashedPassword,
             ]);
 
             $message = 'Utilisateur créé avec succès.';
@@ -41,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -84,6 +93,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php endforeach; ?>
                 </select>
             </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                    Mot de passe :
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" id="password" name="password" required>
+            </div>
             <div class="flex items-center justify-between">
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                     Créer l'utilisateur
@@ -97,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <?php
-require('foot.php');  // Chargement du pied de page.php
-?>
+    require('foot.php');  // Chargement du pied de page.php
+    ?>
 </body>
 </html>
