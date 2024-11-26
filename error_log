@@ -484,3 +484,19 @@ Stack trace:
 [23-Nov-2024 12:09:56 UTC] PHP Warning:  session_start(): Failed to read session data: files (path: /var/cpanel/php/sessions/alt-php44) in /home/mascodep/public_html/api.mascodeproduct.com/php/logout.php on line 3
 [23-Nov-2024 12:09:56 UTC] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/mascodep/public_html/api.mascodeproduct.com/php/logout.php on line 4
 [23-Nov-2024 12:10:04 UTC] PHP Warning:  Undefined variable $x in /home/mascodep/public_html/api.mascodeproduct.com/php/dashboard.php on line 422
+[23-Nov-2024 13:50:18 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'password' in 'field list' in /home/mascodep/public_html/api.mascodeproduct.com/php-native/login.php:36
+Stack trace:
+#0 /home/mascodep/public_html/api.mascodeproduct.com/php-native/login.php(36): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/mascodep/public_html/api.mascodeproduct.com/php-native/login.php on line 36
+[23-Nov-2024 13:52:53 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'password' in 'field list' in /home/mascodep/public_html/api.mascodeproduct.com/php-native/login.php:36
+Stack trace:
+#0 /home/mascodep/public_html/api.mascodeproduct.com/php-native/login.php(36): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/mascodep/public_html/api.mascodeproduct.com/php-native/login.php on line 36
+[23-Nov-2024 14:01:08 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'password' in 'field list' in /home/mascodep/public_html/api.mascodeproduct.com/php-native/login.php:36
+Stack trace:
+#0 /home/mascodep/public_html/api.mascodeproduct.com/php-native/login.php(36): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/mascodep/public_html/api.mascodeproduct.com/php-native/login.php on line 36
+[23-Nov-2024 15:16:38 UTC] PHP Deprecated:  password_verify(): Passing null to parameter #2 ($hash) of type string is deprecated in /home/mascodep/public_html/api.mascodeproduct.com/php-native/login.php on line 41
