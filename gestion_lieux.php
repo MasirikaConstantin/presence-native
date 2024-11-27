@@ -1,13 +1,14 @@
 <?php
 // gestion_lieux.php
+
+require_once 'config.php';
+require_once 'db.php';
 session_start();
 if (!isset($_SESSION['admin_id'])) {
     header('Location: login.php');
     exit;
 }
 
-require_once 'config.php';
-require_once 'db.php';
 
 $pdo = getDbConnection();
 

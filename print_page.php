@@ -1,4 +1,6 @@
 <?php
+require_once 'config.php';
+
 session_start();
 require 'fpdf/fpdf.php';
 
