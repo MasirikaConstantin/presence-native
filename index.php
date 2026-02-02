@@ -3,6 +3,10 @@
 
 require_once 'db.php';
 session_start();
+if (isset($_SESSION['admin_id'])) {
+    header('Location: dashboard.php');
+    exit;
+}
 
 $em="";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -87,6 +87,9 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </form>
     </div>
     <table class="w-full" id="myTable">
+    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+  <span class="font-medium">Appuyez</span> Sur un utilisateur pour voir ses activités
+</div>
         <thead>
             
             <th>id</th>
@@ -99,7 +102,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php foreach ($users as $user): ?>
             <tr id="trs" >
             <td><?= $user["id"]?></td>
-                <td><?php echo htmlspecialchars($user['nom']); ?></td>
+                <td><a href="/users.php?users=<?=$user['id'];?>" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline"  ><?php echo htmlspecialchars($user['nom']); ?></a></td>
                 <td>
                     <button data-modal-target="deleteModal<?php echo $user['id']; ?>" data-modal-toggle="deleteModal<?php echo $user['id']; ?>" class="text-red-600 hover:text-red-800" type="button">
                         Supprimer
